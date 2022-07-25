@@ -16,8 +16,165 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>Наследование в JavaScript</section>
+				<section>
+					<pre><code data-line-numbers="1-3|1-5| 7-8">  function Auto() {
+		console.log('Машина');
+	}
+
+	const bmw = new Auto();
+
+	console.log(bmw)
+	=> Auto {}
+					</code></pre>
+				</section>
+
+        <section>Добавим свойства</section>
+
+				<section>
+					<pre>
+						<code data-line-numbers="1|1-2|1-3|1-4|7-8|10-11|13-14">  function Auto(brand, price, gas) {
+		this.brand = brand;
+		this.price = price;
+		this.gas = gas;
+	}
+
+	const bmw = new Auto('bmw', '100,000', 100);
+	const volvo = new Auto('volvo', '120,000', 130);
+
+	console.log(bmw)
+	=> Auto {brand: 'bmw', price: '100,000', gas: 100}
+
+	console.log(volvo)
+	=> Auto {brand: 'volvo', price: '120,000', gas: 130}
+					</code></pre>
+				</section>
+
+				<section>Добавим метод</section>
+
+				<section>
+					<pre>
+						<code data-line-numbers="1-4|5-12">  function Auto(brand, price, gas) {
+		this.brand = brand;
+		this.price = price;
+		this.gas = gas;
+		this.drive = function() {
+			if(this.gas > 0) {
+				this.gas = this.gas - 20;
+				return this.gas;
+			} else {
+				console.log('Бензин закончился')
+			}
+		}
+	}
+					</code></pre>
+				</section>
+
+				<section>
+					<pre>
+						<code data-line-numbers="1|3-4|6-7|8-9|10-11">  const bmw = new Auto('bmw', '100,000', 40);
+	
+	console.log(bmw);
+	=> Auto {brand: 'bmw', price: '100,000', gas: 40, drive: f}
+
+	bmw.drive()
+	=> 20
+	bmw.drive()
+	=> 0
+	bmw.drive()
+	=> 'Бензин закончился'
+					</code></pre>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Важно!
+						Каждый раз при создании нового экземпляра создается новый метод drive
+					</textarea>
+				</section>
+
+				<section>
+					<pre>
+						<code data-line-numbers="1-2|4-5">  const bmw = new Auto('bmw', '100,000', 40);
+	const bmw = new Auto('volvo', '120,000', 40);
+	
+	bmw.drive === volvo.drive
+	=> false
+					</code></pre>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### Для текущего примера не критично
+						Но если будет создано 1000 или 100 000 экземпляров класса и столько методов.
+					  И это скажется на производительности приложения.
+					</textarea>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### Решаем эту проблему
+					</textarea>
+				</section>
+
+				<section>
+					<pre>
+					<code data-line-numbers="1-2|1-5">          const cars = ['toyota', 'tesla']
+					const numbers = [1,2,3]
+					
+					cars.map === numbers.map
+					=> true
+					</code></pre>
+				</section>
+
+				<section>
+					<pre>
+					<code data-line-numbers="7|7-14|1-5">         function Auto(brand, price, gas) {
+						this.brand = brand;
+						this.price = price;
+						this.gas = gas;
+					}
+					
+					Auto.prototype.drive = function() {
+						if(this.gas > 0) {
+							this.gas = this.gas - 20;
+							return this.gas;
+						} else {
+							console.log('Бензин закончился')
+						}
+					}
+
+					const bmw = new Auto('bmw', '100,000', 40);
+					</code></pre>
+				</section>
+
+				<section>
+					<pre>
+						<code data-line-numbers="1|3-4">  const bmw = new Auto('bmw', '100,000', 40);
+	
+	console.log(bmw);
+	=> Auto {brand: 'bmw', price: '100,000', gas: 40}
+					</code></pre>
+				</section>
+
+				<section>
+					<img data-src="./examples/assets/img/slide.jpg">
+				</section>
+
+				<section>
+					<pre>
+						<code data-line-numbers="1|3-4|6|8-9">  const letters = 'hello'
+	
+	letters.toUpperCase()
+	=> 'HELLO'
+
+	String.prototype.toUpperCase = function() {return 'Wooooow'}
+
+	letters.toUpperCase()
+	=> 'Wooooow'
+					</code></pre>
+				</section>
+
 			</div>
 		</div>
 
