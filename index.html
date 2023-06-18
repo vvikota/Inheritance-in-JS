@@ -1,24 +1,72 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Наследование в JavaScript</section>
-				<section>
-					<pre><code data-line-numbers="1-3|1-5| 7-8">  function Auto() {
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown>
+				<textarea data-template>
+					## Наследование в JavaScript
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+					### Определение прототипа
+					Прототип - объект, наследуется от родительского прототипа, т. е. это механизм, с помощью которого объекты JavaScript наследуют свойства друг от друга.
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+					### Цепочка прототипов
+					Под этим определением понимается что прототип наследуется от прототипа родителя, тот в свою очередь наследует у своего родителя и так далее.
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+					Поиск по цепочке прототипов производится от текущего элемента вверх. То есть если разработчик вызывает какой либо метод и движок JS не находит такого метода у текущего обьекта то обращается к прототипу родителя и так далее вверх по цепочке прототипов.
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+					### Определение класса
+					Классы в JavaScript были введены в ECMAScript 2015 и представляют собой синтаксический сахар над существующим в JavaScript механизмом прототипного наследования. 
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+					Синтаксис классов не вводит новую объектно-ориентированную модель, а предоставляет более простой и понятный способ создания объектов и организации наследования.
+				</textarea>
+			</section>
+			
+			<section data-markdown>
+				<textarea data-template>
+					### Наследование классов
+					Наследование классов – это способ расширения одного класса другим классом.
+            Таким образом, мы можем добавить новый функционал к уже существующему.
+				</textarea>
+			</section>
+			
+			<section>
+				<pre><code data-line-numbers="1-3|1-5| 7-8">  function Auto() {
 		console.log('Машина');
 	}
 
@@ -27,12 +75,12 @@
 	console.log(bmw)
 	=> Auto {}
 					</code></pre>
-				</section>
+			</section>
 
-        <section>Добавим свойства</section>
+			<section>Добавим свойства</section>
 
-				<section>
-					<pre>
+			<section>
+				<pre>
 						<code data-line-numbers="1|1-2|1-3|1-4|7-8|10-11|13-14">  function Auto(brand, price, gas) {
 		this.brand = brand;
 		this.price = price;
@@ -48,12 +96,12 @@
 	console.log(volvo)
 	=> Auto {brand: 'volvo', price: '120,000', gas: 130}
 					</code></pre>
-				</section>
+			</section>
 
-				<section>Добавим метод</section>
+			<section>Добавим метод</section>
 
-				<section>
-					<pre>
+			<section>
+				<pre>
 						<code data-line-numbers="1-4|5-12">  function Auto(brand, price, gas) {
 		this.brand = brand;
 		this.price = price;
@@ -68,10 +116,10 @@
 		}
 	}
 					</code></pre>
-				</section>
+			</section>
 
-				<section>
-					<pre>
+			<section>
+				<pre>
 						<code data-line-numbers="1|3-4|6-7|8-9|10-11">  const bmw = new Auto('bmw', '100,000', 40);
 	
 	console.log(bmw);
@@ -84,52 +132,52 @@
 	bmw.drive()
 	=> 'Бензин закончился'
 					</code></pre>
-				</section>
+			</section>
 
-				<section data-markdown>
-					<textarea data-template>
+			<section data-markdown>
+				<textarea data-template>
 						## Важно!
 						Каждый раз при создании нового экземпляра создается новый метод drive
 					</textarea>
-				</section>
+			</section>
 
-				<section>
-					<pre>
+			<section>
+				<pre>
 						<code data-line-numbers="1-2|4-5">  const bmw = new Auto('bmw', '100,000', 40);
 	const bmw = new Auto('volvo', '120,000', 40);
 	
 	bmw.drive === volvo.drive
 	=> false
 					</code></pre>
-				</section>
+			</section>
 
-				<section data-markdown>
-					<textarea data-template>
+			<section data-markdown>
+				<textarea data-template>
 						### Для текущего примера не критично
 						Но если будет создано 1000 или 100 000 экземпляров класса и столько методов.
 					  И это скажется на производительности приложения.
 					</textarea>
-				</section>
+			</section>
 
-				<section data-markdown>
-					<textarea data-template>
+			<section data-markdown>
+				<textarea data-template>
 						### Решаем эту проблему
 					</textarea>
-				</section>
+			</section>
 
-				<section>
-					<pre>
+			<section>
+				<pre>
 					<code data-line-numbers="1-2|1-5">          const cars = ['toyota', 'tesla']
 					const numbers = [1,2,3]
 					
 					cars.map === numbers.map
 					=> true
 					</code></pre>
-				</section>
+			</section>
 
-				<section>
-					<pre>
-					<code data-line-numbers="7|7-14|1-5">         function Auto(brand, price, gas) {
+			<section>
+				<pre>
+					<code data-line-numbers="1-5|7-14">         function Auto(brand, price, gas) {
 						this.brand = brand;
 						this.price = price;
 						this.gas = gas;
@@ -144,43 +192,100 @@
 						}
 					}
 					</code></pre>
-				</section>
+			</section>
 
-				<section>
-					<pre>
+			<section>
+				<pre>
 						<code data-line-numbers="1|3-4">  const bmw = new Auto('bmw', '100,000', 40);
 	
 	console.log(bmw);
 	=> Auto {brand: 'bmw', price: '100,000', gas: 40}
 					</code></pre>
-				</section>
+			</section>
 
-				<section>
-					<img data-src="./examples/assets/img/slide.jpg">
-				</section>
-
-				<section>
-					<pre>
-						<code data-line-numbers="1|3-4|6|8-9">  const letters = 'hello'
+			<section>
+				<pre>
+						<code data-line-numbers="1-2|3-4|5-6">  bmw.drive();
+	=> 20
+	bmw.drive();
+	=> 0
+	bmw.drive();
+	Бензин закончился 
+					</code></pre>
+			</section>
+			
+			<section>
+				<pre>
+						<code data-line-numbers="1|3-4|6-7|9-10">  const letters = 'hello'
 	
 	letters.toUpperCase()
 	=> 'HELLO'
 
-	String.prototype.toUpperCase = function() {return 'Wooooow'}
+	String.prototype.toUpperCase =
+	  function() {return 'Wooooow'}
 
 	letters.toUpperCase()
 	=> 'Wooooow'
 					</code></pre>
-				</section>
+			</section>
 
-				<section data-markdown>
-					<textarea data-template>
+			<section data-markdown>
+				<textarea data-template>
+					### Так делать не рекомендуется
+					Потому что когда разработчик вызывает метод String.prototype.toUpperCase то есть ожидания как он отработает
+				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+						### Особенности стрелочных функция
+						1. Не может быть конструктором
+						2. Метод определенный с использованием стрелочной функции привязывает this к объекту класса.
+					</textarea>
+			</section>
+			
+			<section data-markdown>
+				<textarea data-template>
+					  Как следствие того, что стрелочные функции не имеют собственного this они не могут быть использованы для создания объектов.
+						Если попытаться вызвать стрелочную функцию с использованием ключевого слова new, JS кинет исключение:
+					</textarea>
+					
+			</section>
+		
+			<section>
+				<pre>
+					<code>const Car = (color) => { this.color = color };
+						
+const redCar = new Car('red'); // TypeError: Car is not a constructor
+				</code></pre>
+			</section>
+
+			<section>
+				<pre>
+					<code>class Hero {
+  constructor(heroName) {
+	  this.heroName = heroName;
+	}
+									
+	logName = () => {
+	  console.log(this.heroName);
+	}
+}
+const batman = new Hero('Batman');
+
+setTimeout(batman.logName, 1000);
+=> 'Batman'
+				</code></pre>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
 						### Методы для работы с прототипами
 					</textarea>
-				</section>
+			</section>
 
-				<section data-markdown>
-					<textarea data-template>
+			<section data-markdown>
+				<textarea data-template>
 						### hasOwnProperty()
 						Возвращает логическое значение, указывающее, содержит ли объект указанное свойство.
 						hasOwnProperty — единственная существующая в JavaScript возможность работать со свойствами, не затрагивая цепочку прототипов. 
@@ -190,10 +295,10 @@
 							</code>
 					  </pre>
 					</textarea>
-				</section>
+			</section>
 
-				<section data-markdown>
-					<textarea data-template>
+			<section data-markdown>
+				<textarea data-template>
 						### Object.create
 						Новый метод для создания объектов, представленный В ECMAScript 5. Прототип создаваемого объекта указывается в первом аргументе этого метода.
 						<pre>
@@ -202,10 +307,10 @@
 							</code>
 					  </pre>
 					</textarea>
-				</section>
+			</section>
 
-				<section data-markdown>
-					<textarea data-template>
+			<section data-markdown>
+				<textarea data-template>
 						### Перебор ключей
 			
 						<pre>
@@ -221,10 +326,56 @@
 							</code>
 					  </pre>
 					</textarea>
-				</section>
+			</section>
 
-				<section data-markdown>
-					<textarea data-template>
+			<section data-markdown>
+				<textarea data-template>
+						### Фабричные функции
+			
+						Любая функция, которая не является классом или конструктором,и возвращает (предположительно новый) объект называется фабричной.
+					</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+						<pre>
+							<code data-line-numbers="all">const userName = 'echo';
+const avatar = 'echo.png';
+
+const user = {
+  userName,
+  avatar,
+  setUserName (userName) {
+    this.userName = userName;
+    return this;
+  }
+};
+							</code>
+					  </pre>
+					</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+						<pre>
+							<code data-line-numbers="all">const createUser = ({ userName, avatar }) => ({
+  userName,
+  avatar,
+  setUserName (userName) {
+    this.userName = userName;
+    return this;
+  }
+});								
+
+const newUser =
+  createUser({ userName: 'batman', avatar: 'batman.png' });
+							</code>
+					  </pre>
+					</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
 						### Материалы:
 			
 1. https://www.youtube.com/watch?v=o_HntOTCqks
@@ -232,24 +383,25 @@
 3. https://learn.javascript.ru/prototype-inheritance
 4. https://developer.mozilla.org/ru/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
 					</textarea>
-				</section>
-			</div>
+			</section>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>
