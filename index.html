@@ -40,8 +40,87 @@
 
 			<section data-markdown>
 				<textarea data-template>
-					Поиск по цепочке прототипов производится от текущего элемента вверх. То есть если разработчик вызывает какой либо метод и движок JS не находит такого метода у текущего обьекта то обращается к прототипу родителя и так далее вверх по цепочке прототипов.
+					Поиск по цепочке прототипов производится от текущего элемента вверх. То есть если разработчик вызывает какой либо метод и движок JS не находит такого метода у текущего обьекта то обращается к прототипу и так далее вверх по цепочке прототипов.
 				</textarea>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>
+					Явно установить прототип можно с помощью специального свойства
+					<pre><code>                         __proto__</code></pre>
+					исторически обусловленный геттер/сеттер для [[Prototype]]
+				</textarea>
+			</section>
+
+			<section>
+				<pre><code data-line-numbers="1-7|9|11-12|13-14">let animal = {
+  eats: true
+};
+
+let rabbit = {
+  jumps: true
+};
+				
+rabbit.__proto__ = animal;
+				
+console.log( rabbit.eats );
+=> true
+console.log( rabbit.jumps );
+=> true
+					</code></pre>
+			</section>
+
+			<section>
+				<pre><code data-line-numbers="1-7|8-11|13-16|18-19|21-22">let animal = {
+  eats: true,
+  walk() {
+		alert("Animal walk");
+	}
+};
+				
+let rabbit = {
+	jumps: true,
+	__proto__: animal
+};
+				
+let longEar = {
+	earLength: 10,
+	__proto__: rabbit
+};
+				
+longEar.walk();
+=> Animal walk
+
+console.log(longEar.jumps)
+=> true
+					</code></pre>
+			</section>
+
+			<section data-markdown>
+				<textarea data-template>На данный момент свойство 'proto' устарело и ему на замену пришли:
+- Object.create(proto, [descriptors]) – создаёт пустой объект со свойством [[Prototype]], указанным как proto, и необязательными дескрипторами свойств descriptors.
+- Object.getPrototypeOf(obj) – возвращает свойство [[Prototype]] объекта obj.
+- Object.setPrototypeOf(obj, proto) – устанавливает свойство [[Prototype]] объекта obj как proto.
+				</textarea>
+			</section>
+
+			<section>
+				<pre><code data-line-numbers="1-5|7-8|10-12|14-15">let animal = {
+	eats: true
+};
+				
+let rabbit = Object.create(animal);
+				
+console.log(rabbit.eats)
+=> true
+
+// получаем прототип объекта rabbit
+console.log(Object.getPrototypeOf(rabbit) === animal);
+=> true
+
+// заменяем прототип объекта rabbit на {}
+Object.setPrototypeOf(rabbit, {}); 
+					</code></pre>
 			</section>
 
 			<section data-markdown>
